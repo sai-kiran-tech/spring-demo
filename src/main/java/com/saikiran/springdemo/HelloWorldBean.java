@@ -2,7 +2,7 @@ package com.saikiran.springdemo;
 
 public class HelloWorldBean {
 
-    String message;
+    private String message;
 
     public HelloWorldBean(String hello_world) {
 
