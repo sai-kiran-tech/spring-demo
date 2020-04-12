@@ -11,17 +11,17 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserDAOService userDAOService;
+    private UserDAOService service;
 
     @GetMapping("/users")
     public List<User> getAllUsers(){
 
-        return userDAOService.finadAll();
+        return service.finadAll();
     }
 
     @GetMapping("/users/{id}")
     public User getUserById(@PathVariable Integer id){
 
-        return userDAOService.findById(id);
+        return service.findById(id);
     }
 }
