@@ -1,4 +1,4 @@
-package com.saikiran.springdemo;
+package com.saikiran.springdemo.helloworld;
 
 public class HelloWorldBean {
 

@@ -1,9 +1,10 @@
-package com.saikiran.user;
+package com.saikiran.springdemo.user;
 
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Component
@@ -11,13 +12,13 @@ public class UserDAOService {
 
     private static List<User> users= new ArrayList<>();
 
-    private int userCount;
+    private int userCount=3;
 
     static {
 
         users.add(new User(1,"John", new Date()));
         users.add(new User(2,"Simha", new Date()));
-        users.add(new User(1,"Rajini", new Date()));
+        users.add(new User(3,"Rajini", new Date()));
 
     }
 
@@ -26,7 +27,7 @@ public class UserDAOService {
         return users;
     }
 
-    public User findById(Integer id){
+    public User findById(int id){
 
         for(User user: users){
             if(user.getId()==id){
@@ -36,11 +37,26 @@ public class UserDAOService {
         return  null;
     }
 
-    public void add(User user){
+    public User add(User user){
 
-        if(user.getId()!=null){
+        if(user.getId()==null){
          user.setId(++userCount);
         }
         users.add(user);
+        return user;
+    }
+
+    public User deleteById(int id){
+
+        Iterator<User> iterator= users.iterator();
+        while(iterator.hasNext()){
+
+            User user= iterator.next();
+            if(user.getId()==id){
+                iterator.remove();
+                return user;
+            }
+        }
+        return  null;
     }
 }
