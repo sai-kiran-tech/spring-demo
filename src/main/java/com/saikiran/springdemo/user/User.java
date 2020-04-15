@@ -2,15 +2,26 @@ package com.saikiran.springdemo.user;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javafx.geometry.Pos;
+import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 import org.springframework.hateoas.RepresentationModel;
 
+import javax.annotation.Generated;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
+@Entity
 @ApiModel(description = "All Details about the User Model")
 public class User extends RepresentationModel<User> {
 
+    @Id
+    @GeneratedValue()
     private  Integer id;
 
     @Size(min = 2, message = "Name Should be minimum 2 Characters Long")
@@ -20,6 +31,13 @@ public class User extends RepresentationModel<User> {
     @Past(message = "Date of birth should be past date")
     @ApiModelProperty(notes = "Date of birth should be past date")
     private  Date date;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
+
+    public User(){
+
+    }
 
     public User(Integer id, String name, Date date) {
         this.id = id;
@@ -49,6 +67,14 @@ public class User extends RepresentationModel<User> {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
     @Override
